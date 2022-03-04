@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -18,9 +19,18 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('roles' , ChoiceType::class , [
+                'multiple' => true,
+                'choices' => [
+                    'Candidat' => 'ROLE_CANDIDATE',
+                    'Recruteur' => 'ROLE_RECRUITER'
+                ],
+                'label' => 'Je suis un : '
+            ])
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'label' => 'J\'accepte les conditions d\'utilisations.',
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You devez accepter les conditions d\'utilisation.',
@@ -33,8 +43,8 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'invalid_message' => 'Les mots de passe ne correspondent pas',
                 'type' => PasswordType::class,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmer mot de passe'],
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
