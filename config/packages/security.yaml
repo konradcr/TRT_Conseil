@@ -1,14 +1,12 @@
 security:
     enable_authenticator_manager: true
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
         App\Entity\User:
             algorithm: auto
 
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
+        # used to log Admin, Consultant, Recruiter and Candidate accounts
         chain_provider:
             chain:
                 providers: [ app_admin_provider, app_consultant_provider, app_recruiter_provider, app_candidate_provider ]
@@ -28,6 +26,7 @@ security:
             entity:
                 class: App\Entity\Candidate
                 property: email
+    # used to define permissions according to roles
     role_hierarchy:
         ROLE_ADMIN:         ROLE_USER
         ROLE_CONSULTANT:    ROLE_USER
@@ -40,6 +39,7 @@ security:
         main:
             lazy: true
             provider: chain_provider
+            # used to check if the account is approved
             user_checker: App\Security\UserChecker
             custom_authenticator: App\Security\AppCustomAuthenticator
             logout:
@@ -47,19 +47,14 @@ security:
                 # where to redirect after logout
                 # target: app_any_route
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+    # used to control access according to roles
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/consultant, roles: ROLE_CONSULTANT }
-        - { path: ^/recruteur, roles: ROLE_RECRUITER }
-        - { path: ^/candidat, roles: ROLE_CANDIDATE }
+        - { path: ^/recruiter, roles: ROLE_RECRUITER }
+        - { path: ^/candidate, roles: ROLE_CANDIDATE }
 
 
 when@test:
