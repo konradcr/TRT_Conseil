@@ -49,4 +49,9 @@ class Recruiter extends User
 
         return $this;
     }
+
+    public function __construct(bool $isApproved = false)
+    {
+        parent::__construct($isApproved);
+    }
 }

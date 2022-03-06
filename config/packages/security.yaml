@@ -40,6 +40,7 @@ security:
         main:
             lazy: true
             provider: chain_provider
+            user_checker: App\Security\UserChecker
             custom_authenticator: App\Security\AppCustomAuthenticator
             logout:
                 path: app_logout

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CandidateRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
@@ -63,5 +64,10 @@ class Candidate extends User
         $this->cvPath = $cvPath;
 
         return $this;
+    }
+
+    public function __construct(bool $isApproved = false)
+    {
+        parent::__construct($isApproved);
     }
 }
