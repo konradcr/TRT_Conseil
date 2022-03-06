@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use App\Entity\Recruiter;
 use App\Form\RegistrationFormType;
 use App\Security\AppCustomAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,32 +12,31 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
-class RegistrationController extends AbstractController
+class RegistrationRecruiterController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
+    #[Route('/register-recruiter', name: 'app_register_recruiter')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $recruiter = new Recruiter();
+        $form = $this->createForm(RegistrationFormType::class, $recruiter);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $user->setPassword(
-            $userPasswordHasher->hashPassword(
-                    $user,
+            $recruiter->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $recruiter,
                     $form->get('plainPassword')->getData()
                 )
             );
-
-            $entityManager->persist($user);
+            $recruiter->setRoles(["ROLE_RECRUITER"]);
+            $entityManager->persist($recruiter);
             $entityManager->flush();
             // do anything else you need here, like send an email
 
             return $userAuthenticator->authenticateUser(
-                $user,
+                $recruiter,
                 $authenticator,
                 $request
             );
