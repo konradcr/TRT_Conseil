@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ConsultantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,10 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function adminDashboard(): Response
+    public function adminDashboard(ConsultantRepository $consultantRepository): Response
     {
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'consultants' => $consultantRepository->findAll(),
         ]);
     }
 }
