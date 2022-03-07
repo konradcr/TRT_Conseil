@@ -3,8 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\CandidateRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
@@ -24,6 +25,9 @@ class Candidate extends User
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $cvPath;
+
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: JobApplication::class, orphanRemoval: true)]
+    private $jobApplications;
 
     public function getId(): ?int
     {
@@ -69,5 +73,37 @@ class Candidate extends User
     public function __construct(bool $isApproved = false)
     {
         parent::__construct($isApproved);
+        $this->jobApplications = new ArrayCollection();
     }
+
+    /**
+     * @return Collection<int, JobApplication>
+     */
+    public function getJobApplications(): Collection
+    {
+        return $this->jobApplications;
+    }
+
+    public function addJobApplication(JobApplication $jobApplication): self
+    {
+        if (!$this->jobApplications->contains($jobApplication)) {
+            $this->jobApplications[] = $jobApplication;
+            $jobApplication->setCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJobApplication(JobApplication $jobApplication): self
+    {
+        if ($this->jobApplications->removeElement($jobApplication)) {
+            // set the owning side to null (unless already changed)
+            if ($jobApplication->getCandidate() === $this) {
+                $jobApplication->setCandidate(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

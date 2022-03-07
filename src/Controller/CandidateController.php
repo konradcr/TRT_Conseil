@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Candidate;
 use App\Form\EditCandidateProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

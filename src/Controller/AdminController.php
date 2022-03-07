@@ -5,14 +5,12 @@ namespace App\Controller;
 use App\Entity\Consultant;
 use App\Form\CreateConsultantType;
 use App\Repository\ConsultantRepository;
-use App\Security\AppCustomAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class AdminController extends AbstractController
 {
@@ -52,7 +50,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/delete-consultant/{id}', name: 'app_admin_delete_consultant')]
-    public function removeConsultant($id, ConsultantRepository $consultantRepository, EntityManagerInterface $entityManager): Response
+    public function removeConsultant(int $id, ConsultantRepository $consultantRepository, EntityManagerInterface $entityManager): Response
     {
         if (!$consultantRepository->find($id)) {
             throw $this->createNotFoundException(sprintf('Le consultant avec l\'id numéro %s n\'existe pas', $id));

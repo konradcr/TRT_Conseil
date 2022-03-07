@@ -21,7 +21,7 @@ class ConsultantController extends AbstractController
     }
 
     #[Route('/consultant/approve-user/{id}', name: 'app_consultant_approve_user')]
-    public function approveUser($id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    public function approveUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         if (!$userRepository->find($id)) {
             throw $this->createNotFoundException(sprintf('Le consultant avec l\'id numéro %s n\'existe pas', $id));
@@ -35,7 +35,7 @@ class ConsultantController extends AbstractController
     }
 
     #[Route('/consultant/disapprove-user/{id}', name: 'app_consultant_disapprove_user')]
-    public function disapproveUser($id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    public function disapproveUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         if (!$userRepository->find($id)) {
             throw $this->createNotFoundException(sprintf('Le consultant avec l\'id numéro %s n\'existe pas', $id));
