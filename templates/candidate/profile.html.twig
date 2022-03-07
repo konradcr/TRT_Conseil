@@ -20,9 +20,9 @@
             <p >Nom : <em>NON RENSEIGNÉE</em></p>
         {% endif %}
         {% if app.user.cvPath %}
-            <p>CV : {{ app.user.cvPath }}</p>
+            <p>CV :  <a target="_blank" href="{{ asset('uploads/CV/' ~ app.user.cvPath) }}">Voir le CV</a></p>
         {% else %}
-            <p >CV : <em>NON RENSEIGNÉE</em></p>
+            <p >CV : <em>NON RENSEIGNÉ</em></p>
         {% endif %}
         <button><a href="{{ path('app_candidate_edit_profile') }}">Modifier le profil</a></button>
     </div>
