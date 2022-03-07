@@ -51,7 +51,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/delete-consultant/{id}', name: 'app_admin_delete_consultant', defaults: ['id'=>0])]
+    #[Route('/admin/delete-consultant/{id}', name: 'app_admin_delete_consultant')]
     public function removeConsultant($id, ConsultantRepository $consultantRepository, EntityManagerInterface $entityManager): Response
     {
         if (!$consultantRepository->find($id)) {

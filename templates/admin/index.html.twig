@@ -11,7 +11,6 @@
         <thead>
         <tr>
             <th>Email</th>
-            <th>ID</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -19,12 +18,11 @@
         {%  for consultant in consultants %}
         <tr>
             <td>{{ consultant.email }}</td>
-            <td>{{ consultant.id }}</td>
             <td><button><a href="{{ path('app_admin_delete_consultant', { 'id' : consultant.id }) }}">Supprimer</a></button></td>
         </tr>
         {% else %}
             <tr>
-                <td>Aucun utilisateur</td>
+                <td>Aucun consultant</td>
             </tr>
         {% endfor %}
         </tbody>
