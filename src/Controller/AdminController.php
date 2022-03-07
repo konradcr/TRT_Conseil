@@ -51,6 +51,20 @@ class AdminController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/delete-consultant/{id}', name: 'app_admin_delete_consultant', defaults: ['id'=>0])]
+    public function removeConsultant($id, ConsultantRepository $consultantRepository, EntityManagerInterface $entityManager): Response
+    {
+        if (!$consultantRepository->find($id)) {
+            throw $this->createNotFoundException(sprintf('Le consultant avec l\'id numéro %s n\'existe pas', $id));
+        }
+
+        $consultant = $consultantRepository->find($id);
+        $entityManager->remove($consultant);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_admin');
+    }
+
     #[Route('/admin/profile', name: 'app_admin_profile')]
     public function adminProfile(): Response
     {

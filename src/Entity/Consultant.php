@@ -13,7 +13,7 @@ class Consultant extends User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    protected $id;
 
     public function getId(): ?int
     {
