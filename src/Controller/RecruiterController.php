@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RecruiterController extends AbstractController
 {
     #[Route('/recruiter', name: 'app_recruiter')]
-    public function index(): Response
+    public function recruiterDashboard(): Response
     {
         return $this->render('recruiter/index.html.twig', [
             'controller_name' => 'RecruiterController',

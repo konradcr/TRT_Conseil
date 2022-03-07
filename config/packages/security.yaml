@@ -42,10 +42,11 @@ security:
             # used to check if the account is approved
             user_checker: App\Security\UserChecker
             custom_authenticator: App\Security\AppCustomAuthenticator
+
+
             logout:
                 path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
+                target: app_home
 
 
 

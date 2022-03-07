@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div>
+    <h1>TRT Conseil</h1>
+
+    <div>
+        <p>Vous souhaitez :</p>
+        <button><a href="{{ path('app_register') }}">Créer un compte</a></button>
+        <button><a href="{{ path('app_login') }}">Se connecter</a></button>
+    </div>
+</div>
+{% endblock %}
