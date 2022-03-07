@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Créer un Consultant{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Créer un Consultant</h1>
+    {{ form_start(createConsultantForm) }}
+    {{ form_row(createConsultantForm.email) }}
+    {{ form_row(createConsultantForm.plainPassword) }}
+
+    <button type="submit" class="btn">Créer un Consultant</button>
+    {{ form_end(createConsultantForm) }}
+</div>
+{% endblock %}
