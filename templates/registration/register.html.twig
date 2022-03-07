@@ -13,8 +13,7 @@
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword) }}
         {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Créer son compte</button>
+        {{ form_row(registrationForm.submit) }}
         {{ form_end(registrationForm) }}
     {% endif %}
 {% endblock %}

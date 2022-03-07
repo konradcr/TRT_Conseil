@@ -9,8 +9,7 @@
     {{ form_start(createConsultantForm) }}
     {{ form_row(createConsultantForm.email) }}
     {{ form_row(createConsultantForm.plainPassword) }}
-
-    <button type="submit" class="btn">Créer un Consultant</button>
+    {{ form_row(createConsultantForm.submit) }}
     {{ form_end(createConsultantForm) }}
 </div>
 {% endblock %}

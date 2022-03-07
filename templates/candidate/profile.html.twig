@@ -24,7 +24,7 @@
         {% else %}
             <p >CV : <em>NON RENSEIGNÉE</em></p>
         {% endif %}
-        <button>Modifier le profil</button>
+        <button><a href="{{ path('app_candidate_edit_profile') }}">Modifier le profil</a></button>
     </div>
 </div>
 {% endblock %}
