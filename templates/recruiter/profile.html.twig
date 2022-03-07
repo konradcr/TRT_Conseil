@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recruteur - Mon Profil{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Mon profil Recruteur</h1>
+    <div>
+        <p>Email : {{ app.user.email }}</p>
+        {% if app.user.company %}
+            <p>Entreprise : {{ app.user.company }}</p>
+        {% else %}
+            <p >Entreprise : <em>NON RENSEIGNÉE</em></p>
+        {% endif %}
+        {% if app.user.adress %}
+            <p>Adresse : {{ app.user.adress }}</p>
+        {% else %}
+            <p >Adresse : <em>NON RENSEIGNÉE</em></p>
+        {% endif %}
+        <button><a href="{{ path('app_recruiter_edit_profile') }}">Modifier le profil</a></button>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recruteur - Modifier mon profil{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Modifier mon profil Recruteur</h1>
+    <div>
+        {{ form_start(editRecruiterProfileForm) }}
+        {{ form_row(editRecruiterProfileForm.company) }}
+        {{ form_row(editRecruiterProfileForm.adress) }}
+        {{ form_end(editRecruiterProfileForm) }}
+    </div>
+</div>
+{% endblock %}

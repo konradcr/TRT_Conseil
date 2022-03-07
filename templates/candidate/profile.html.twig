@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidat - Mon Profil{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Mon profil Candidat</h1>
+    <div>
+        <p>Email : </p>
+        <p>{{ app.user.email }}</p>
+        {% if app.user.firstName %}
+            <p>Prénom : {{ app.user.firstName }}</p>
+        {% else %}
+            <p >Prénom : <em>NON RENSEIGNÉE</em></p>
+        {% endif %}
+        {% if app.user.lastName %}
+            <p>Nom : {{ app.user.lastName }}</p>
+        {% else %}
+            <p >Nom : <em>NON RENSEIGNÉE</em></p>
+        {% endif %}
+        {% if app.user.cvPath %}
+            <p>CV : {{ app.user.cvPath }}</p>
+        {% else %}
+            <p >CV : <em>NON RENSEIGNÉE</em></p>
+        {% endif %}
+        <button>Modifier le profil</button>
+    </div>
+</div>
+{% endblock %}

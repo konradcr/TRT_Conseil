@@ -23,4 +23,11 @@ class ConsultantController extends AbstractController
             'controller_name' => 'ConsultantController',
         ]);
     }
+
+    #[Route('/consultant/profile', name: 'app_consultant_profile')]
+    public function consultantProfile(): Response
+    {
+        return $this->render('consultant/profile.html.twig', [
+        ]);
+    }
 }

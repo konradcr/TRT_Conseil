@@ -25,7 +25,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/create-consultant', name: 'app_admin_create_consultant')]
-    public function createConsultant(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function createConsultant(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $consultant = new Consultant();
         $form = $this->createForm(CreateConsultantType::class, $consultant);
