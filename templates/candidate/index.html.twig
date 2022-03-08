@@ -4,7 +4,7 @@
 
 {% block body %}
     <div>
-        <h1>Liste des annonces</h1>
+        <h1>Liste des annonces ({{ jobOffers|length }})</h1>
         {% for jobOffer in jobOffers %}
             <div>
                 {{ jobOffer.title }}

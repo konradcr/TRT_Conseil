@@ -4,14 +4,32 @@
 
 {% block body %}
 <div>
-    <h1>Mes annonces</h1>
+    <h1>Mes annonces ({{ myJobOffers|length}})</h1>
     <button><a href="{{ path('app_recruiter_post_job_offer') }}">Publier une nouvelle offre</a></button>
     {% for jobOffer in myJobOffers %}
         <div>
-            {{ jobOffer.title }}
+            <h2>{{ jobOffer.title }}</h2>
             {{ jobOffer.location }}
             {{ jobOffer.description }}
             {{ jobOffer.isApproved ? "Publiée" : "En cours d'approbation"}}
+            <h3>Liste des candidats ({{ jobOffer.jobApplications|length }})</h3>
+            {% for application in jobOffer.jobApplications %}
+                {% if application.isApproved %}
+                {{ application.candidate.firstName }}
+                {{ application.candidate.lastName }}
+
+                    {% if application.candidate.cvPath  %}
+                        <a href="{{ asset('uploads/CV/' ~ application.candidate.cvPath) }}">Voir CV</a>
+                    {% else %}
+                        <td><em>Aucun CV</em></td>
+                    {% endif %}
+
+                    {% else %}
+                    <em>Candidature en attente d'approbation</em>
+                {% endif %}
+            {% else %}
+            Aucun candidat n'a postulé
+            {% endfor %}
             <button><a href="{{ path('app_recruiter_delete_job_offer', { 'id' : jobOffer.id }) }}">Supprimer</a></button>
         </div>
     {% endfor %}

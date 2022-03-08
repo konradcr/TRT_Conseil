@@ -5,7 +5,7 @@
 {% block body %}
 <div>
     <h1>Mes demandes d'approbation</h1>
-    <h2>Comptes à approuver</h2>
+    <h2>Comptes à approuver ({{ users|length }})</h2>
     <table>
         <thead>
         <tr>
@@ -35,7 +35,7 @@
         {% endfor %}
         </tbody>
     </table>
-    <h2>Offres à approuver</h2>
+    <h2>Offres à approuver ({{ jobOffers|length }}) </h2>
     <table>
         <thead>
         <tr>
@@ -67,7 +67,7 @@
         {% endfor %}
         </tbody>
     </table>
-    <h2>Candidatures à approuver</h2>
+    <h2>Candidatures à approuver ({{ jobApplications|length }})</h2>
     <table>
         <thead>
         <tr>

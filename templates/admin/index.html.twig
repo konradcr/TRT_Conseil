@@ -5,7 +5,7 @@
 {% block body %}
 
 <div>
-    <h1>Liste des Consultants</h1>
+    <h1>Liste des Consultants ({{ consultants|length }})</h1>
     <button><a href="{{ path('app_admin_create_consultant') }}">Créer un Consultant</a></button>
     <table>
         <thead>
