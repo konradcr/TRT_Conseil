@@ -25,7 +25,7 @@ class JobOffer
     private $description;
 
     #[ORM\Column(type: 'boolean')]
-    private $isApproved;
+    private $isApproved = false;
 
     #[ORM\ManyToOne(targetEntity: Recruiter::class, inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]

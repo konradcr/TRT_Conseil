@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recruteur - Publier une offre{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Publier une offre d'emploi</h1>
+    {{ form_start(postJobOfferForm) }}
+    {{ form_row(postJobOfferForm.title) }}
+    {{ form_row(postJobOfferForm.location) }}
+    {{ form_row(postJobOfferForm.description) }}
+    {{ form_row(postJobOfferForm.submit) }}
+    {{ form_end(postJobOfferForm) }}
+</div>
+{% endblock %}
