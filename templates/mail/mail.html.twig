@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div>
+    <h1>TRT Conseil - Candidature reçue</h1>
+    <div>
+        <h2>Offre : {{ jobApplication.jobOffer.title }}</h2>
+        <p>Lieu de travail : {{ jobApplication.jobOffer.location }}</p>
+        <p>Description : {{ jobApplication.jobOffer.description }}</p>
+    </div>
+    <div>
+        <h2>Candidat :</h2>
+        <p>Prénom : {{ jobApplication.candidate.firstName }}</p>
+        <p>Nom : {{ jobApplication.candidate.lastName }}</p>
+    </div>
+</div>
+{% endblock %}

@@ -8,6 +8,10 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ConsultantController extends AbstractController
@@ -89,7 +93,7 @@ class ConsultantController extends AbstractController
     }
 
     #[Route('/consultant/approve-job-application/{id}', name: 'app_consultant_approve_job_application')]
-    public function approveJobApplication(int $id, JobApplicationRepository $jobApplicationRepository, EntityManagerInterface $entityManager): Response
+    public function approveJobApplication(int $id, JobApplicationRepository $jobApplicationRepository, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         if (!$jobApplicationRepository->find($id)) {
             throw $this->createNotFoundException(sprintf('La candidature avec l\'id numéro %s n\'existe pas', $id));
@@ -98,6 +102,39 @@ class ConsultantController extends AbstractController
         $jobApplication = $jobApplicationRepository->find($id);
         $jobApplication->setIsApproved(true);
         $entityManager->flush();
+
+        // send email to recruiter
+        if ($jobApplication->getCandidate()->getCvPath()) {
+            $mail = (new TemplatedEmail())
+                ->from(new Address('no-reply@trt-conseil.com', 'TRT Conseil'))
+                ->to($jobApplication->getJobOffer()->getRecruiter()->getEmail())
+                ->subject('Candidature pour l\'offre : '.$jobApplication->getJobOffer()->getTitle())
+                ->attachFromPath('uploads/CV/'.$jobApplication->getCandidate()->getCvPath())
+                ->htmlTemplate('mail/mail.html.twig')
+                ->context([
+                    'jobApplication' => $jobApplication
+                ])
+            ;
+        } else {
+            $mail = (new TemplatedEmail())
+                ->from(new Address('no-reply@trt-conseil.com', 'TRT Conseil'))
+                ->to($jobApplication->getJobOffer()->getRecruiter()->getEmail())
+                ->subject('Candidature pour l\'offre : '.$jobApplication->getJobOffer()->getTitle())
+                ->htmlTemplate('mail/mail.html.twig')
+                ->context([
+                    'jobApplication' => $jobApplication
+                ])
+            ;
+        }
+
+
+        try {
+            $mailer->send($mail);
+        } catch (TransportExceptionInterface $e) {
+            $e->getMessage();
+        }
+
+
 
         return $this->redirectToRoute('app_consultant');
     }
