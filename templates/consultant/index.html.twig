@@ -35,5 +35,37 @@
         {% endfor %}
         </tbody>
     </table>
+    <h2>Offres à approuver</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Entreprise</th>
+            <th>Recruteur</th>
+            <th>Intitulé du poste</th>
+            <th>Lieu de travail</th>
+            <th>Description détaillée</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%  for jobOffer in jobOffers %}
+            <tr>
+                <td>{{ jobOffer.recruiter.company }}</td>
+                <td>{{ jobOffer.recruiter.email }}</td>
+                <td>{{ jobOffer.title }}</td>
+                <td>{{ jobOffer.location }}</td>
+                <td>{{ jobOffer.description }}</td>
+                <td>
+                    <button><a href="">Approuver</a></button>
+                    <button><a href="">Refuser</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>Aucune offre à approuver</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
