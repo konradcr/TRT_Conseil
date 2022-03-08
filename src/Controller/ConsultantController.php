@@ -27,26 +27,61 @@ class ConsultantController extends AbstractController
     public function approveUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         if (!$userRepository->find($id)) {
-            throw $this->createNotFoundException(sprintf('Le consultant avec l\'id numéro %s n\'existe pas', $id));
+            throw $this->createNotFoundException(sprintf('L\'utilisateur avec l\'id numéro %s n\'existe pas', $id));
         }
 
-        $consultant = $userRepository->find($id);
-        $consultant->setIsApproved(true);
+        $user = $userRepository->find($id);
+        $user->setIsApproved(true);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_consultant', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_consultant');
     }
 
     #[Route('/consultant/disapprove-user/{id}', name: 'app_consultant_disapprove_user')]
     public function disapproveUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         if (!$userRepository->find($id)) {
-            throw $this->createNotFoundException(sprintf('Le consultant avec l\'id numéro %s n\'existe pas', $id));
+            throw $this->createNotFoundException(sprintf('L\'utilisateur avec l\'id numéro %s n\'existe pas', $id));
         }
 
-        $consultant = $userRepository->find($id);
-        $entityManager->remove($consultant);
+        $user = $userRepository->find($id);
+        $userRoles = $user->getRoles();
+
+        // consultant can only disapprove recruiters and candidates
+        if (in_array('ROLE_RECRUITER', $userRoles) || in_array('ROLE_CANDIDATE', $userRoles)) {
+            $entityManager->remove($user);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_consultant');
+    }
+
+    #[Route('/consultant/approve-job-offer/{id}', name: 'app_consultant_approve_job_offer')]
+    public function approveJobOffer(int $id, JobOfferRepository $jobOfferRepository, EntityManagerInterface $entityManager): Response
+    {
+        if (!$jobOfferRepository->find($id)) {
+            throw $this->createNotFoundException(sprintf('L\'offre avec l\'id numéro %s n\'existe pas', $id));
+        }
+
+        $jobOffer = $jobOfferRepository->find($id);
+        $jobOffer->setIsApproved(true);
         $entityManager->flush();
+
+        return $this->redirectToRoute('app_consultant');
+    }
+
+    #[Route('/consultant/disapprove-job-offer/{id}', name: 'app_consultant_disapprove_job_offer')]
+    public function disapproveJobOffer(int $id, JobOfferRepository $jobOfferRepository, EntityManagerInterface $entityManager): Response
+    {
+        if (!$jobOfferRepository->find($id)) {
+            throw $this->createNotFoundException(sprintf('L\'offre avec l\'id numéro %s n\'existe pas', $id));
+        }
+
+        $jobOffer = $jobOfferRepository->find($id);
+
+        $entityManager->remove($jobOffer);
+        $entityManager->flush();
+
         return $this->redirectToRoute('app_consultant');
     }
 

@@ -56,8 +56,8 @@
                 <td>{{ jobOffer.location }}</td>
                 <td>{{ jobOffer.description }}</td>
                 <td>
-                    <button><a href="">Approuver</a></button>
-                    <button><a href="">Refuser</a></button>
+                    <button><a href="{{ path('app_consultant_approve_job_offer', { 'id' : jobOffer.id }) }}">Approuver</a></button>
+                    <button><a href="{{ path('app_consultant_disapprove_job_offer', { 'id' : jobOffer.id }) }}">Refuser</a></button>
                 </td>
             </tr>
         {% else %}
