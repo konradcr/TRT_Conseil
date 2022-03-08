@@ -67,5 +67,39 @@
         {% endfor %}
         </tbody>
     </table>
+    <h2>Candidatures à approuver</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>CV</th>
+            <th>Intitulé de l'offre</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%  for jobApplication in jobApplications %}
+            <tr>
+                <td>{{ jobApplication.candidate.firstName }}</td>
+                <td>{{ jobApplication.candidate.lastName }}</td>
+                {% if jobApplication.candidate.cvPath  %}
+                    <td><a href="{{ asset('uploads/CV/' ~ jobApplication.candidate.cvPath) }}">Voir CV</a></td>
+                {% else %}
+                    <td><em>Aucun CV</em></td>
+                {% endif %}
+                <td>{{ jobApplication.jobOffer.title }}</td>
+                <td>
+                    <button><a href="">Approuver</a></button>
+                    <button><a href="">Refuser</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>Aucune offre à approuver</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

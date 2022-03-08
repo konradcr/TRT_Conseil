@@ -10,15 +10,14 @@
                 {{ jobOffer.title }}
                 {{ jobOffer.location }}
                 {{ jobOffer.description }}
-
                 {% if jobOffer.hasApplied %}
                     <button disabled>Déjà postulé</button>
                 {% else %}
                     <button><a href="{{ path('app_candidate_apply_job_offer', { 'id' : jobOffer.id }) }}">Postuler</a></button>
                 {% endif %}
-
-
             </div>
+        {% else %}
+            <div>Aucune annonce publiée</div>
         {% endfor %}
     </div>
 {% endblock %}

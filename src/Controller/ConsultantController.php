@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\JobApplicationRepository;
 use App\Repository\JobOfferRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,14 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConsultantController extends AbstractController
 {
     #[Route('/consultant', name: 'app_consultant')]
-    public function consultantDashboard(UserRepository $userRepository, JobOfferRepository $jobOfferRepository): Response
+    public function consultantDashboard(UserRepository $userRepository, JobOfferRepository $jobOfferRepository, JobApplicationRepository $jobApplicationRepository): Response
     {
         $usersToApprove = $userRepository->findBy(['isApproved' => 0]);
         $jobOffersToApprove = $jobOfferRepository->findBy(['isApproved' => 0]);
+        $jobApplicationsToApprove = $jobApplicationRepository->findBy(['isApproved' => 0]);
 
         return $this->render('consultant/index.html.twig', [
             'users' => $usersToApprove,
-            'jobOffers' => $jobOffersToApprove
+            'jobOffers' => $jobOffersToApprove,
+            'jobApplications' => $jobApplicationsToApprove
         ]);
     }
 
