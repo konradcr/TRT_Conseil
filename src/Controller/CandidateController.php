@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\JobApplication;
 use App\Form\EditCandidateProfileType;
-use App\Repository\JobApplicationRepository;
 use App\Repository\JobOfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

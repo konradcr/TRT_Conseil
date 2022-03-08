@@ -88,6 +88,20 @@ class ConsultantController extends AbstractController
         return $this->redirectToRoute('app_consultant');
     }
 
+    #[Route('/consultant/approve-job-application/{id}', name: 'app_consultant_approve_job_application')]
+    public function approveJobApplication(int $id, JobApplicationRepository $jobApplicationRepository, EntityManagerInterface $entityManager): Response
+    {
+        if (!$jobApplicationRepository->find($id)) {
+            throw $this->createNotFoundException(sprintf('La candidature avec l\'id numéro %s n\'existe pas', $id));
+        }
+
+        $jobApplication = $jobApplicationRepository->find($id);
+        $jobApplication->setIsApproved(true);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_consultant');
+    }
+
     #[Route('/consultant/profile', name: 'app_consultant_profile')]
     public function consultantProfile(): Response
     {
