@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\EditCandidateProfileType;
+use App\Repository\JobOfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -15,10 +16,12 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class CandidateController extends AbstractController
 {
     #[Route('/candidate', name: 'app_candidate')]
-    public function candidateDashboard(): Response
+    public function candidateDashboard(JobOfferRepository $jobOfferRepository): Response
     {
+        $jobOffers = $jobOfferRepository->findBy(['isApproved' => 1]);
+
         return $this->render('candidate/index.html.twig', [
-            'controller_name' => 'CandidateController',
+            'jobOffers' => $jobOffers,
         ]);
     }
 

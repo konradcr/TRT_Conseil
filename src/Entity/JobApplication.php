@@ -14,7 +14,7 @@ class JobApplication
     private $id;
 
     #[ORM\Column(type: 'boolean')]
-    private $isApproved;
+    private $isApproved = false;
 
     #[ORM\ManyToOne(targetEntity: Candidate::class, inversedBy: 'jobApplications')]
     #[ORM\JoinColumn(nullable: false)]
