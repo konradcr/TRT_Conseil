@@ -3,10 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\JobOffer;
-use App\Entity\Recruiter;
-use App\Form\CreateConsultantType;
 use App\Form\CreateJobOfferType;
 use App\Form\EditRecruiterProfileType;
+use App\Repository\JobOfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,10 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class RecruiterController extends AbstractController
 {
     #[Route('/recruiter', name: 'app_recruiter')]
-    public function recruiterDashboard(): Response
+    public function recruiterDashboard(JobOfferRepository $jobOfferRepository): Response
     {
+        $recruiter = $this->getUser();
+        $myJobOffers = $jobOfferRepository->findBy(['recruiter' => $recruiter]);
+
         return $this->render('recruiter/index.html.twig', [
-            'controller_name' => 'RecruiterController',
+            'myJobOffers' => $myJobOffers,
         ]);
     }
 
@@ -68,5 +70,23 @@ class RecruiterController extends AbstractController
         return $this->render('recruiter/post-job-offer.html.twig', [
             'postJobOfferForm' => $form->createView(),
         ]);
+    }
+
+    #[Route('/recruiter/delete-job-offer/{id}', name: 'app_recruiter_delete_job_offer')]
+    public function deleteJobOffer(int $id, JobOfferRepository $jobOfferRepository, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if (!$jobOfferRepository->find($id)) {
+            throw $this->createNotFoundException(sprintf('L\'offre avec l\'id numéro %s n\'existe pas', $id));
+        }
+
+        $jobOffer = $jobOfferRepository->find($id);
+
+        // recruiters can only delete their own job offers
+        if ($jobOffer->getRecruiter() === $this->getUser()) {
+            $entityManager->remove($jobOffer);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_recruiter');
     }
 }
