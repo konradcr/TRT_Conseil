@@ -1,0 +1,29 @@
+<table class="table table-hover my-3">
+    <thead>
+        <tr>
+            <th>Rôle</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%  for user in users %}
+        <tr>
+            <td>
+            {% for role in user.roles %}
+                {{ role|replace({'ROLE_':''})|capitalize }}
+            {% endfor %}
+            </td>
+            <td>{{ user.email }}</td>
+            <td>
+                <a class="btn btn-primary" href="{{ path('app_consultant_approve_user', { 'id' : user.id }) }}">Approuver</a>
+                <a class="btn btn-danger" href="{{ path('app_consultant_disapprove_user', { 'id' : user.id }) }}">Refuser</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">Aucun utilisateur à approuver</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

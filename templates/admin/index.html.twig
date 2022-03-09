@@ -7,13 +7,13 @@
 {% endblock %}
 
 {% block body %}
-
 <div class="m-5">
-    <h1>
+    <h1 class="text-center justify-content-end">
         Liste des Consultants ({{ consultants|length }})
-        <a class="btn btn-primary mx-5" href="{{ path('app_admin_create_consultant') }}">Créer un Consultant</a>
+        <div class="text-end">
+            <a class="btn btn-primary mx-5" href="{{ path('app_admin_create_consultant') }}">Créer un Consultant</a>
+        </div>
     </h1>
-
     {% include('admin/_list-consultants.html.twig') %}
 </div>
 {% endblock %}

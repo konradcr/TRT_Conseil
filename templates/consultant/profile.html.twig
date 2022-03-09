@@ -2,13 +2,15 @@
 
 {% block title %}Consultant - Mon Profil{% endblock %}
 
-{% block body %}
+{% block header %}
+    {% include('header/header-consultant.html.twig') %}
+{% endblock %}
 
-<div>
-    <h1>Mon profil Consultant</h1>
+{% block body %}
+<div class="text-center my-5">
+    <h1 class="h1">Mon profil Consultant</h1>
     <div>
-        <p>Email : </p>
-        <p>{{ app.user.email }}</p>
+        <p class="mt-5"><b>Email :</b> {{ app.user.email }}</p>
     </div>
 </div>
 {% endblock %}

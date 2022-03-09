@@ -2,104 +2,18 @@
 
 {% block title %}Consultant Dashboard{% endblock %}
 
+{% block header %}
+    {% include('header/header-consultant.html.twig') %}
+{% endblock %}
+
 {% block body %}
-<div>
-    <h1>Mes demandes d'approbation</h1>
+<div class="m-5">
+    <h1 class="text-center">Mes demandes d'approbation</h1>
     <h2>Comptes à approuver ({{ users|length }})</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Rôle</th>
-            <th>Email</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        {%  for user in users %}
-            <tr>
-                <td>
-                    {% for role in user.roles %}
-                        {{ role|replace({'ROLE_':''})|capitalize }}
-                    {% endfor %}
-                </td>
-                <td>{{ user.email }}</td>
-                <td>
-                    <button><a href="{{ path('app_consultant_approve_user', { 'id' : user.id }) }}">Approuver</a></button>
-                    <button><a href="{{ path('app_consultant_disapprove_user', { 'id' : user.id }) }}">Refuser</a></button>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td>Aucun utilisateur à approuver</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% include('consultant/_list-users-to-approve.html.twig') %}
     <h2>Offres à approuver ({{ jobOffers|length }}) </h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Entreprise</th>
-            <th>Recruteur</th>
-            <th>Intitulé du poste</th>
-            <th>Lieu de travail</th>
-            <th>Description détaillée</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        {%  for jobOffer in jobOffers %}
-            <tr>
-                <td>{{ jobOffer.recruiter.company }}</td>
-                <td>{{ jobOffer.recruiter.email }}</td>
-                <td>{{ jobOffer.title }}</td>
-                <td>{{ jobOffer.location }}</td>
-                <td>{{ jobOffer.description }}</td>
-                <td>
-                    <button><a href="{{ path('app_consultant_approve_job_offer', { 'id' : jobOffer.id }) }}">Approuver</a></button>
-                    <button><a href="{{ path('app_consultant_disapprove_job_offer', { 'id' : jobOffer.id }) }}">Refuser</a></button>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td>Aucune offre à approuver</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% include('consultant/_list-offers-to-approve.html.twig') %}
     <h2>Candidatures à approuver ({{ jobApplications|length }})</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Prénom</th>
-            <th>Nom</th>
-            <th>CV</th>
-            <th>Intitulé de l'offre</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        {%  for jobApplication in jobApplications %}
-            <tr>
-                <td>{{ jobApplication.candidate.firstName }}</td>
-                <td>{{ jobApplication.candidate.lastName }}</td>
-                {% if jobApplication.candidate.cvPath  %}
-                    <td><a href="{{ asset('uploads/CV/' ~ jobApplication.candidate.cvPath) }}">Voir CV</a></td>
-                {% else %}
-                    <td><em>Aucun CV</em></td>
-                {% endif %}
-                <td>{{ jobApplication.jobOffer.title }}</td>
-                <td>
-                    <button><a href="{{ path('app_consultant_approve_job_application', { 'id' : jobApplication.id }) }}">Approuver</a></button>
-                    <button><a href="{{ path('app_consultant_disapprove_job_application', { 'id' : jobApplication.id }) }}">Refuser</a></button>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td>Aucune offre à approuver</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% include('consultant/_list-applications-to-approve.html.twig') %}
 </div>
 {% endblock %}
