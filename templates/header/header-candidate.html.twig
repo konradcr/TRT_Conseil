@@ -1,0 +1,16 @@
+<header class="p-3 bg-light">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="{{ path('app_candidate') }}" class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none text-black">
+                TRT Conseil
+            </a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 px-5">
+                <li><a href="{{ path('app_candidate') }}" {% if route_name == "app_candidate" %} class="nav-link px-2" {% else %} class="nav-link px-2 text-secondary" {% endif %}>Accueil</a></li>
+                <li><a href="{{ path('app_candidate_profile') }}" {% if (route_name == "app_candidate_profile") or (route_name == "app_candidate_edit_profile") %} class="nav-link px-2" {% else %} class="nav-link px-2 text-secondary" {% endif %}>Mon profil</a></li>
+            </ul>
+            <div class="text-end">
+                <a href="{{ path('app_logout') }}" type="button" class="btn btn-outline-danger">Se déconnecter</a>
+            </div>
+        </div>
+    </div>
+</header>

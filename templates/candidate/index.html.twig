@@ -2,22 +2,13 @@
 
 {% block title %}Candidat Dashboard{% endblock %}
 
+{% block header %}
+    {% include('header/header-candidate.html.twig') %}
+{% endblock %}
+
 {% block body %}
-    <div>
-        <h1>Liste des annonces ({{ jobOffers|length }})</h1>
-        {% for jobOffer in jobOffers %}
-            <div>
-                {{ jobOffer.title }}
-                {{ jobOffer.location }}
-                {{ jobOffer.description }}
-                {% if jobOffer.hasApplied %}
-                    <button disabled>Déjà postulé</button>
-                {% else %}
-                    <button><a href="{{ path('app_candidate_apply_job_offer', { 'id' : jobOffer.id }) }}">Postuler</a></button>
-                {% endif %}
-            </div>
-        {% else %}
-            <div>Aucune annonce publiée</div>
-        {% endfor %}
-    </div>
+<div class="m-5">
+    <h1 class="text-center justify-content-end">Liste des annonces ({{ jobOffers|length }})</h1>
+    {% include('candidate/_list-offers.html.twig') %}
+</div>
 {% endblock %}
