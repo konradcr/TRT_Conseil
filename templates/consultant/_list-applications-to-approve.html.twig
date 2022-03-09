@@ -14,7 +14,7 @@
             <td>{{ jobApplication.candidate.firstName }}</td>
             <td>{{ jobApplication.candidate.lastName }}</td>
             {% if jobApplication.candidate.cvPath  %}
-                <td><a href="{{ asset('uploads/CV/' ~ jobApplication.candidate.cvPath) }}">Voir CV</a></td>
+                <td><a target="_blank" href="{{ asset('uploads/CV/' ~ jobApplication.candidate.cvPath) }}">Voir CV</a></td>
             {% else %}
                 <td><em>Aucun CV</em></td>
             {% endif %}

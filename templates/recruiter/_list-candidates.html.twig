@@ -1,0 +1,33 @@
+<h5>Liste des candidats ({{ jobOffer.jobApplications|length }})</h5>
+<table class="table table-hover my-3">
+    <thead>
+    <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>CV</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for application in jobOffer.jobApplications %}
+        <tr>
+            {% if application.isApproved %}
+                <td>{{ application.candidate.firstName }}</td>
+                <td>{{ application.candidate.lastName }}</td>
+                <td>
+                    {% if application.candidate.cvPath  %}
+                        <a target="_blank" class="btn-link" href="{{ asset('uploads/CV/' ~ application.candidate.cvPath) }}">Voir CV</a>
+                    {% else %}
+                        <em>Aucun CV</em>
+                    {% endif %}
+                </td>
+            {% else %}
+                <td colspan="3"><em>Candidature en attente d'approbation</em></td>
+            {% endif %}
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3"><em>Aucun candidat n'a postulé</em></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

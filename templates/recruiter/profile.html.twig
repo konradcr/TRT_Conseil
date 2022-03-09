@@ -2,23 +2,26 @@
 
 {% block title %}Recruteur - Mon Profil{% endblock %}
 
-{% block body %}
+{% block header %}
+    {% include('header/header-recruiter.html.twig') %}
+{% endblock %}
 
-<div>
+{% block body %}
+<div class="text-center my-5">
     <h1>Mon profil Recruteur</h1>
-    <div>
-        <p>Email : {{ app.user.email }}</p>
+    <div class="mt-5">
+        <p><b>Email : </b>{{ app.user.email }}</p>
         {% if app.user.company %}
-            <p>Entreprise : {{ app.user.company }}</p>
+            <p><b>Entreprise : </b>{{ app.user.company }}</p>
         {% else %}
-            <p >Entreprise : <em>NON RENSEIGNÉE</em></p>
+            <p><b>Entreprise : </b><em>NON RENSEIGNÉE</em></p>
         {% endif %}
         {% if app.user.adress %}
-            <p>Adresse : {{ app.user.adress }}</p>
+            <p><b>Adresse : </b>{{ app.user.adress }}</p>
         {% else %}
-            <p >Adresse : <em>NON RENSEIGNÉE</em></p>
+            <p><b>Adresse : </b><em>NON RENSEIGNÉE</em></p>
         {% endif %}
-        <button><a href="{{ path('app_recruiter_edit_profile') }}">Modifier le profil</a></button>
+        <a class="btn btn-primary" href="{{ path('app_recruiter_edit_profile') }}">Modifier le profil</a>
     </div>
 </div>
 {% endblock %}
