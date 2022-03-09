@@ -2,14 +2,18 @@
 
 {% block title %}Admin - Créer un Consultant{% endblock %}
 
+{% block header %}
+    {% include('header/header-admin.html.twig') %}
+{% endblock %}
+
 {% block body %}
 
-<div>
-    <h1>Créer un Consultant</h1>
+<div class="w-25 mx-auto my-5">
+    <h1 class="h3 text-center">Créer un Consultant</h1>
     {{ form_start(createConsultantForm) }}
     {{ form_row(createConsultantForm.email) }}
     {{ form_row(createConsultantForm.plainPassword) }}
-    {{ form_row(createConsultantForm.submit) }}
+    <div class="text-center my-5">{{ form_row(createConsultantForm.submit) }}</div>
     {{ form_end(createConsultantForm) }}
 </div>
 {% endblock %}

@@ -2,30 +2,18 @@
 
 {% block title %}Admin Dashboard{% endblock %}
 
+{% block header %}
+    {% include('header/header-admin.html.twig') %}
+{% endblock %}
+
 {% block body %}
 
-<div>
-    <h1>Liste des Consultants ({{ consultants|length }})</h1>
-    <button><a href="{{ path('app_admin_create_consultant') }}">Créer un Consultant</a></button>
-    <table>
-        <thead>
-        <tr>
-            <th>Email</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        {%  for consultant in consultants %}
-        <tr>
-            <td>{{ consultant.email }}</td>
-            <td><button><a href="{{ path('app_admin_delete_consultant', { 'id' : consultant.id }) }}">Supprimer</a></button></td>
-        </tr>
-        {% else %}
-            <tr>
-                <td>Aucun consultant</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="m-5">
+    <h1>
+        Liste des Consultants ({{ consultants|length }})
+        <a class="btn btn-primary mx-5" href="{{ path('app_admin_create_consultant') }}">Créer un Consultant</a>
+    </h1>
+
+    {% include('admin/_list-consultants.html.twig') %}
 </div>
 {% endblock %}

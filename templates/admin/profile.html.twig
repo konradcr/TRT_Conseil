@@ -2,13 +2,16 @@
 
 {% block title %}Admin - Mon Profil{% endblock %}
 
+{% block header %}
+    {% include('header/header-admin.html.twig') %}
+{% endblock %}
+
 {% block body %}
 
-<div>
-    <h1>Mon profil Admin</h1>
+<div class="text-center my-5">
+    <h1 class="h1">Mon profil Admin</h1>
     <div>
-        <p>Email : </p>
-        <p>{{ app.user.email }}</p>
+        <p class="mt-5"><b>Email :</b> {{ app.user.email }}</p>
     </div>
 </div>
 {% endblock %}

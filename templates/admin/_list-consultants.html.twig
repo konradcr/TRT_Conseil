@@ -1,0 +1,21 @@
+<table class="table table-hover my-3">
+    <thead>
+        <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%  for consultant in consultants %}
+        <tr>
+            <td>{{ consultant.email }}</td>
+            <td><a class="btn btn-danger" href="{{ path('app_admin_delete_consultant', { 'id' : consultant.id }) }}">Supprimer</a></td>
+        </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">Aucun consultant</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
