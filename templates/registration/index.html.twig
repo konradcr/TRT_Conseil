@@ -1,15 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RegistrationController!{% endblock %}
+{% block title %}Créer son compte{% endblock %}
+
+{% block header %}
+    {% include('header/header-home.html.twig') %}
+{% endblock %}
 
 {% block body %}
-<div>
-    <h1>Se créer un compte</h1>
-
-    <div>
-        <p>Vous êtes :</p>
-        <button><a href="{{ path('app_register_candidate') }}">Candidat</a></button>
-        <button><a href="{{ path('app_register_recruiter') }}">Recruteur</a></button>
+    <div class="form-signin text-center">
+        <h1 class="h3 py-5">Créer son compte</h1>
+        {% if app.user %}
+            <div class="mb-3 text-center">
+                Vous êtes connecté avec l'adresse email {{ app.user.username }} <br> <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </div>
+        {% else %}
+            <div class="">
+                <a class="btn btn-primary" href="{{ path('app_register_candidate') }}">Candidat</a>
+                <a class="btn btn-primary" href="{{ path('app_register_recruiter') }}">Recruteur</a>
+            </div>
+        {% endif %}
     </div>
-</div>
 {% endblock %}

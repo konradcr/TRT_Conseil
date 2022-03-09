@@ -1,19 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Créer son compte {{ role }}{% endblock %}
+
+{% block header %}
+    {% include('header/header-home.html.twig') %}
+{% endblock %}
 
 {% block body %}
-    <h1>Se créer un compte {{ role }}</h1>
-    {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecté avec l'adresse email {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
-        </div>
-    {% else %}
-        {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-        {{ form_row(registrationForm.submit) }}
-        {{ form_end(registrationForm) }}
-    {% endif %}
+    <div class="form-signin">
+        <h1 class="h3">Créer son compte {{ role }}</h1>
+        {% if app.user %}
+            <div class="mb-3">
+                Vous êtes connecté avec l'adresse email {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </div>
+        {% else %}
+
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_row(registrationForm.submit) }}
+            {{ form_end(registrationForm) }}
+        {% endif %}
+    </div>
+
 {% endblock %}

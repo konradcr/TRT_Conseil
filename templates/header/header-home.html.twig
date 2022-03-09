@@ -1,0 +1,28 @@
+<header class="p-3 bg-light">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none">
+                TRT Conseil
+            </a>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <!--
+                <li><a href="/" class="nav-link px-2 text-secondary">Accueil</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                -->
+            </ul>
+            {% if app.user %}
+                <div class="text-end">
+                    <a href="{{ path('app_logout') }}" type="button" class="btn btn-outline-danger">Se déconnecter</a>
+                </div>
+            {% else %}
+                <div class="text-end">
+                    <a href="{{ path('app_register') }}" type="button" class="btn btn-primary">Créer son compte</a>
+                    <a href="{{ path('app_login') }}" type="button" class="btn btn-outline-primary me-2">Se connecter</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</header>
