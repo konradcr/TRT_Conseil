@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class CreateJobOfferType extends AbstractType
 {
@@ -16,13 +17,28 @@ class CreateJobOfferType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => "Intitulé de l'offre"
+                'label' => "Intitulé de l'offre",
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Saisissez un intitulé.',
+                    ]),
+                ]
             ])
             ->add('location', TextType::class, [
-                'label' => "Lieu de travail"
+                'label' => "Lieu de travail",
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Saisissez un lieu de travail.',
+                    ]),
+                ]
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description détaillée (horaires, salaires, ...)'
+                'label' => 'Description détaillée (horaires, salaires, ...)',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Saisissez une description.',
+                    ]),
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Publier l\'annonce'

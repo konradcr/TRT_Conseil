@@ -39,7 +39,6 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $candidate->setRoles(["ROLE_CANDIDATE"]);
             $entityManager->persist($candidate);
             $entityManager->flush();
             // do anything else you need here, like send an email
@@ -68,7 +67,6 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $recruiter->setRoles(["ROLE_RECRUITER"]);
             $entityManager->persist($recruiter);
             $entityManager->flush();
             // do anything else you need here, like send an email

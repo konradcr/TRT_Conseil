@@ -17,7 +17,7 @@ class EditCandidateProfileType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
             ])
             ->add('lastName', TextType::class, [
                 'label' => 'Nom'

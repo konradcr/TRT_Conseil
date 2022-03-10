@@ -15,6 +15,11 @@ class Admin extends User
     #[ORM\Column(type: 'integer')]
     protected $id;
 
+    public function __construct(bool $isApproved = true, array $roles = ['ROLE_ADMIN'])
+    {
+        parent::__construct($isApproved, $roles);
+    }
+
     public function getId(): ?int
     {
         return $this->id;

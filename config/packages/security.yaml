@@ -42,12 +42,11 @@ security:
             # used to check if the account is approved
             user_checker: App\Security\UserChecker
             custom_authenticator: App\Security\AppCustomAuthenticator
-
-
             logout:
                 path: app_logout
                 target: app_home
-
+            login_throttling:
+                max_attempts: 3
 
 
     # used to control access according to roles

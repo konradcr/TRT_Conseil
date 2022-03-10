@@ -8,12 +8,12 @@
             </ul>
             {% if app.user %}
                 <div class="text-end">
-                    <a href="{{ path('app_logout') }}" type="button" class="btn btn-outline-danger">Se déconnecter</a>
+                    <a href="{{ path('app_logout') }}" class="btn btn-outline-danger">Se déconnecter</a>
                 </div>
             {% else %}
                 <div class="text-end">
-                    <a href="{{ path('app_register') }}" type="button" class="btn btn-primary">Créer son compte</a>
-                    <a href="{{ path('app_login') }}" type="button" class="btn btn-outline-primary me-2">Se connecter</a>
+                    <a href="{{ path('app_register') }}" class="btn btn-primary">Créer son compte</a>
+                    <a href="{{ path('app_login') }}" class="btn btn-outline-primary me-2">Se connecter</a>
                 </div>
             {% endif %}
         </div>

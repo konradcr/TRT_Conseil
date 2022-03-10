@@ -37,7 +37,6 @@ class AdminController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $consultant->setRoles(["ROLE_CONSULTANT"]);
             $entityManager->persist($consultant);
             $entityManager->flush();
 
