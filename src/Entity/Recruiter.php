@@ -55,9 +55,9 @@ class Recruiter extends User
         return $this;
     }
 
-    public function __construct(bool $isApproved = false, array $roles = ['ROLE_RECRUITER'])
+    public function __construct(array $roles = ['ROLE_RECRUITER'], bool $isApproved = false)
     {
-        parent::__construct($isApproved, $roles);
+        parent::__construct($roles, $isApproved);
         $this->jobOffers = new ArrayCollection();
     }
 

@@ -129,7 +129,7 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function __construct(bool $isApproved = true, array $roles)
+    public function __construct(array $roles, bool $isApproved = true)
     {
         $this->isApproved = $isApproved;
         $this->roles = $roles;

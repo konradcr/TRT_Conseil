@@ -70,9 +70,9 @@ class Candidate extends User
         return $this;
     }
 
-    public function __construct(bool $isApproved = false, array $roles = ['ROLE_CANDIDATE'])
+    public function __construct(array $roles = ['ROLE_CANDIDATE'], bool $isApproved = false)
     {
-        parent::__construct($isApproved, $roles);
+        parent::__construct($roles, $isApproved);
         $this->jobApplications = new ArrayCollection();
     }
 

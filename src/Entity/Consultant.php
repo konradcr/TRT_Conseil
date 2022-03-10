@@ -15,9 +15,9 @@ class Consultant extends User
     #[ORM\Column(type: 'integer')]
     protected $id;
 
-    public function __construct(bool $isApproved = true, array $roles = ['ROLE_CONSULTANT'])
+    public function __construct(array $roles = ['ROLE_CONSULTANT'], bool $isApproved = true)
     {
-        parent::__construct($isApproved, $roles);
+        parent::__construct($roles, $isApproved);
     }
 
     public function getId(): ?int
