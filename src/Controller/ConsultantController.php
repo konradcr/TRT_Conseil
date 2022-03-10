@@ -106,7 +106,7 @@ class ConsultantController extends AbstractController
         // send email to recruiter
         if ($jobApplication->getCandidate()->getCvPath()) {
             $mail = (new TemplatedEmail())
-                ->from(new Address('no-reply@trt-conseil.com', 'TRT Conseil'))
+                ->from(new Address('app252862435@heroku.com', 'TRT Conseil'))
                 ->to($jobApplication->getJobOffer()->getRecruiter()->getEmail())
                 ->subject('Candidature pour l\'offre : '.$jobApplication->getJobOffer()->getTitle())
                 ->attachFromPath('uploads/CV/'.$jobApplication->getCandidate()->getCvPath())
@@ -117,7 +117,7 @@ class ConsultantController extends AbstractController
             ;
         } else {
             $mail = (new TemplatedEmail())
-                ->from(new Address('no-reply@trt-conseil.com', 'TRT Conseil'))
+                ->from(new Address('app252862435@heroku.com', 'TRT Conseil'))
                 ->to($jobApplication->getJobOffer()->getRecruiter()->getEmail())
                 ->subject('Candidature pour l\'offre : '.$jobApplication->getJobOffer()->getTitle())
                 ->htmlTemplate('mail/mail.html.twig')
