@@ -7,4 +7,5 @@
 /var/
 /vendor/
 /node_modules/
+.DS_Store
 ###< symfony/framework-bundle ###
